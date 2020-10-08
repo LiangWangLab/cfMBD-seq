@@ -11,5 +11,10 @@ R/RStudio (version  or greater)
 Packages: BSgenome.hsapiens.UCSC.hg19, RaMWAS, MEDIPS
 
 # Procedure
-1. Bash to process raw data FASTQ files to BAM files  
-```./fastq_to_bam.sh```
+1. Bash to process raw data FASTQ files to BAM files.  
+```./fastq_to_bam.sh```  
+2. Quality control using RaMWAS, which generates summary QC (including duplicate  rate%, non-CpG coverage, CpG coverage, and noise) and coverage by CpG density plot.  
+```Rscript RaMWAS.R```  
+3. Quality control using MEDIPS, which generates saturation analysis plot and genome-wide correlation between samples.  
+```Rscript MEDIPS.R```   
+4. Call CpG annotations coverage using bedtools and normalize the coverage using R.
