@@ -11,5 +11,5 @@ R/RStudio (version  or greater)
 Packages: BSgenome.hsapiens.UCSC.hg19, RaMWAS, MEDIPS
 
 # Procedure
-1. Bash to process raw data FASTQ files to BAM files
+1. Bash to process raw data FASTQ files to BAM files  
 ```./fastq_to_bam.sh```
