@@ -6,9 +6,9 @@ The code within the LiangWanglab/cfMBD-seq repository is used for quick quality 
 
 # Requirements
 Computer running a Linux system (≥ 8 GB RAM) Cluster computing is HIGHLY recommended when working with FASTQ/BAM files  
-Modules: bowtie2 (version ), samtools (version ), reference genome-human/hg19, bedtools (version )  
-R/RStudio (version  or greater)  
-Packages: BSgenome.hsapiens.UCSC.hg19, RaMWAS, MEDIPS
+Modules: Bowtie2 (Version 2.4.2), reference genome-human/hg19, samtools (Version ???), bedtools (Version 2.28.0), Integrative Genomics Viewer
+R (Version 4.0.3 or greater)  
+R Packages: BSgenome.hsapiens.UCSC.hg19, RaMWAS (Version 1.12.0), MEDIPS (Version 1.40.0)
 
 # Procedure
 1. Bash to process raw data FASTQ files to BAM files.  
@@ -18,3 +18,6 @@ Packages: BSgenome.hsapiens.UCSC.hg19, RaMWAS, MEDIPS
 3. Quality control using MEDIPS, which generates saturation analysis plot and genome-wide correlation between samples.  
 ```Rscript MEDIPS.R```   
 4. Call CpG annotations coverage using bedtools and normalize the coverage using R.
+```Rscript CpG_annotations_reference.R```   
+```./CpG_annotations.sh```  
+```Rscript CpG_annotations_coverage.R```   
