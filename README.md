@@ -17,7 +17,7 @@ R Packages: BSgenome.hsapiens.UCSC.hg19, RaMWAS (Version 1.12.0), MEDIPS (Versio
 ```Rscript RaMWAS.R```  
 3. Quality control using MEDIPS, which generates saturation analysis plot and genome-wide correlation between samples.  
 ```Rscript MEDIPS.R```   
-4. Call CpG annotations coverage using bedtools and normalize the coverage using R.
+4. Call CpG annotations coverage using bedtools and normalize the coverage using R.  
 ```Rscript CpG_annotations_reference.R```   
 ```./CpG_annotations.sh```  
 ```Rscript CpG_annotations_coverage.R```   
