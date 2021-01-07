@@ -6,7 +6,7 @@ do
        fastp -i $i.fastq.gz -o $i.fastp.fastq.gz -j $i.fastp.json -h $i.fastp.html -R $i
        rm $i.fastq.gz
        mv "$i.fastp.fastq.gz" "$i.fastq.gz"
-       echo Bowtie2 SE alignment of $i
+       echo Bowtie2 single-end alignment of $i
        bowtie2 -x hg19 -U $i.fastq.gz -S $i.sam -D 15 -R 2 -N 0 -L 20 -i S,1,0.75 -p 6
        rm $i.fastq.gz
        echo Convert $i sam to bam
