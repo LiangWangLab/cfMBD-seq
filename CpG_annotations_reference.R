@@ -14,4 +14,4 @@ CpG_df_annotated = data.frame(CpG_annotated)
 CpG_cut <- CpG_df_annotated[,c(6:9,15)] 
 CpG_order <- CpG_cut[order(CpG_cut$annot.start),]
 CpG_order <- CpG_orer[order(CpG_orer$annot.seqnames),]
-write.table(CpG_order,"CpG.bed", sep="\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(CpG_order,"hg19_CpG_annotation.bed", sep="\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
