@@ -1,21 +1,19 @@
 library(tidyverse)
 library(data.table)
-#combine all text files
-data <- lapply(Sys.glob("*.txt"), read.table)
+
+files = list.files(path = "data/.", pattern = ".txt") #listing files with .txt extension in the `data` folder
+file_names = unlist(strsplit(files, ".txt")) #getting file basename
+
+#parallel read all files in data directory; 0.55s for 36 files
+data <- lapply(paste("data/", files, sep=""), data.table::fread)
+
+#9.17s for 36 files
+#data = lapply(paste("data/", files, sep=""), read.table)
+
 df <- dplyr::bind_cols(data)
-df <- df[,c(1:4,seq(5, 215, by = 5))]#Change the parameter based on the number of samples (n*5)
-#Rename column
-df <- df %>% 
-  rename(
-Chr = V1...1,Start = V2...2,End = V3...3,Annotation = V4...4,
-cfMBD03 = V5...5,cfMBD06 = V5...10,cfMBD07 = V5...15,cfMBD08 = V5...20,cfMBD12 = V5...25,
-cfMBD16 = V5...30,cfMBD17 = V5...35,cfMBD18 = V5...40,cfMBD19 = V5...45,cfMBD20 = V5...50,cfMBD21 = V5...55,
-cfMBD22 = V5...60,cfMBD23 = V5...65,cfMBD24 = V5...70,cfMBD25 = V5...75,cfMBD26 = V5...80,cfMBD27 = V5...85,
-cfMBD28 = V5...90,cfMBD29 = V5...95,cfMBD30 = V5...100,cfMBD31 = V5...105,cfMBD38 = V5...110,cfMBD39 = V5...115,
-cfMBD40 = V5...120,cfMBD41 = V5...125,cfMBD44 = V5...130,cfMBD45 = V5...135,cfMBD46 = V5...140,cfMBD47 = V5...145,
-cfMBD48 = V5...150,cfMBD49 = V5...155,cfMBD51 = V5...160,cfMBD52 = V5...165,cfMBD53 = V5...170,cfMBD54 = V5...175,
-cfMBD55 = V5...180,cfMBD56 = V5...185,cfMBD57 = V5...190,cfMBD58 = V5...195,cfMBD61 = V5...200,cfMBD62 = V5...205,
-cfMBD63 = V5...210,cfMBD64 = V5...215)#Change the parameter here
+df <- data.frame(df)[,c(1:4,seq(5, ncol(df), by = 5))] #autoscale
+colnames(df) = c("Chr", "Start", "End", "Annotation", file_names) #rename columns by file name
+
 #Add length and type column
 df <- add_column(df, Length = df$End - df$Start + 1, .after = "End")
 df <- separate(df, "Annotation", "Type", sep = ":", remove = FALSE)
