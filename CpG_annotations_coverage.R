@@ -1,15 +1,12 @@
 library(tidyverse)
 library(data.table)
 
-files = list.files(path = "data/.", pattern = ".txt") #listing files with .txt extension in the `data` folder
+#listing files with .txt extension in the `data` folder
+files = list.files(path = "data/.", pattern = ".txt") 
 file_names = unlist(strsplit(files, ".txt")) #getting file basename
 
-#parallel read all files in data directory; 0.55s for 36 files
+#parallel read all files in data directory
 data <- lapply(paste("data/", files, sep=""), data.table::fread)
-
-#9.17s for 36 files
-#data = lapply(paste("data/", files, sep=""), read.table)
-
 df <- dplyr::bind_cols(data)
 df <- data.frame(df)[,c(1:4,seq(5, ncol(df), by = 5))] #autoscale
 colnames(df) = c("Chr", "Start", "End", "Annotation", file_names) #rename columns by file name
