@@ -3,7 +3,10 @@ Rscript CpG_annotations_reference.R
 
 #Create a folder named 'data' for output
 import os
-os.makedirs('./1/2/3/4/5', exist_ok=True)
+path = os.getcwd()
+for i in range(0,40):
+    file_path = path + '\data'+ str(i)
+    os.mkdir(file_path)
 
 #Loop through all bam files for CpG annotations
 for i in $(ls *.bam | cut -c 1-2)
