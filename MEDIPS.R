@@ -9,27 +9,25 @@ shift=0
 ws=1000
 
 ##Data Import and Preprocessing
-a = MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
-a = c(a, MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws))
-b = MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
-b = c(b, MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws))
-c = MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
-d = MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
-Input = MEDIPS.createSet(file = "xx.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
+Treatment1 = MEDIPS.createSet(file = "101.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
+Treatment1 = c(Treatment1, MEDIPS.createSet(file = "102.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws))
+Treatment1 = c(Treatment1, MEDIPS.createSet(file = "103.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws))
+Treatment2 = MEDIPS.createSet(file = "201.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
+Treatment2 = c(Treatment2, MEDIPS.createSet(file = "202.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws))
+Treatment3 = MEDIPS.createSet(file = "301.bam", BSgenome = BSgenome, extend = extend, shift = shift, uniq = uniq, window_size = ws)
 
 ##Export Wiggle files for visualization of rpkm normalized data
-MEDIPS.exportWIG(Set = a, file = "a.wig", format = "rpkm", descr = "a")
-MEDIPS.exportWIG(Set = b, file = "b.wig", format = "rpkm", descr = "b")
-MEDIPS.exportWIG(Set = c, file = "c.wig", format = "rpkm", descr = "c")
-MEDIPS.exportWIG(Set = d, file = "d.wig", format = "rpkm", descr = "d")
+MEDIPS.exportWIG(Set = Treatment1, file = "Treatment1.wig", format = "rpkm", descr = "Treatment1")
+MEDIPS.exportWIG(Set = Treatment2, file = "Treatment2.wig", format = "rpkm", descr = "Treatment2")
+MEDIPS.exportWIG(Set = Treatment3, file = "Treatment3.wig", format = "rpkm", descr = "Treatment3")
 
 ##Correlation between samples
-cor.matrix = MEDIPS.correlation(MSets = c(a, b, c, d, Input), plot = F, method = "pearson")
+cor.matrix = MEDIPS.correlation(MSets = c(Treatment1, Treatment2, Treatment3), plot = T, method = "pearson")
 cor.matrix
 
 ##Saturation analysis
-sr1 = MEDIPS.saturation(file = "xx.bam", BSgenome = BSgenome, uniq = uniq, extend = extend, shift = shift, window_size = ws,  nit = 10, nrit = 1, empty_bins = TRUE,rank = FALSE)
-MEDIPS.plotSaturation(sr1, main="xxx")
+srTreatment1 = MEDIPS.saturation(file = "101.bam", BSgenome = BSgenome, uniq = uniq, extend = extend, shift = shift, window_size = ws,  nit = 10, nrit = 1, empty_bins = TRUE,rank = FALSE)
+MEDIPS.plotSaturation(srTreatment1, main="xxx")
 
-sr2 = MEDIPS.saturation(file = "xx.bam", BSgenome = BSgenome, uniq = uniq, extend = extend, shift = shift, window_size = ws, nit = 10, nrit = 1, empty_bins = TRUE,rank = FALSE)
-MEDIPS.plotSaturation(sr2, main="xxx")
+srTreatment2 = MEDIPS.saturation(file = "201.bam", BSgenome = BSgenome, uniq = uniq, extend = extend, shift = shift, window_size = ws, nit = 10, nrit = 1, empty_bins = TRUE,rank = FALSE)
+MEDIPS.plotSaturation(srTreatment2, main="xxx")
