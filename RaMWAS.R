@@ -24,12 +24,6 @@ ramwas1scanBams(param)
 ramwas2collectqc(param)
 #Open /qc/summary_bams/Summary_QC.txt to see summary QC.
 
-##No need to run
-ramwas3normalizedCoverage(param)
-ramwas4PCA(param)
-ramwas5MWAS(param)
-ramwas6annotateTopFindings(param)
-
 ##Example of making a Coverage by CpG density plot 
 #change working directory
 setwd(".../rds_qc")
